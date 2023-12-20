@@ -79,9 +79,11 @@ function dragDrop(e) {
 
 function changePlayer() {
     if (playerGo === "black") {
+        reverseIds()
         playerGo = "white"
         playerDisplay.textContent = 'white'
     } else {
+        revertIds()
         playerGo = "black"
         playerDisplay.textContent = 'black'
     }
@@ -94,5 +96,6 @@ function reverseIds() {
 }
 
 function revertIds() {
-    
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => square.setAttribute('square-id', i))
 }
