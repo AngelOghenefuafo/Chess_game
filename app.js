@@ -68,9 +68,9 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation()
-    console.log('e.target', e.target)
     const correctGo = draggedElement.firstChild.classList.contains(playerGo)
     const taken = e.target.classList.contains('piece')
+    const valid = checkIfValid(e.target)
     const opponentGo = playerGo === 'white' ? 'black' : 'white'
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo)
 
@@ -88,8 +88,32 @@ function dragDrop(e) {
             setTimeout(() => infoDisplay.textContent = "", 2000)
             return
         }
+        if (valid) {
+            e.target.append(draggedElement)
+            changePlayer()
+            return
+        }
     }
-    //e.target.append(draggedElement)
+}
+
+function checkIfValid(target) {
+    const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'))
+    const startId = Number(startPostitionId)
+    const piece = draggedElement.id
+    console.log('targetId',targetId)
+    console.log('startId', startId)
+    console.log('piece', piece)
+
+    switch(piece) {
+        case 'pawn' :
+            const starterRow = [8,9,10,11,12,13,14,15]
+            //valid move
+            if (
+                starterRow.includes(startId) && startId + width * 2 === targetId
+                ) {
+                    return true
+                }
+    }
 }
 
 function changePlayer() {
