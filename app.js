@@ -76,6 +76,13 @@ function dragDrop(e) {
 
     if (correctGo) {
         //check if valid
+        if (takenByOpponent && valid) {
+            e.target.parentNode.append(draggedElement)
+            e.target.remove()
+            changePlayer()
+            return
+        }
+
         if (taken && !takenByOpponent) {
             infoDisplay.textContent = "you can't move here!"
             setTimeout(() => infoDisplay.textContent = "", 2000)
