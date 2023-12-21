@@ -316,15 +316,14 @@ function revertIds() {
 }
 
 function checkWin() {
-    const king = Array.from(document.querySelectorAll('#king'))
+    const kings = Array.from(document.querySelectorAll('#king'))
     console.log(kings)
     if (!kings.some(king => king.firstChild.classList.contains('white'))) {
         infoDisplay.innerHTML = "Black wins!"
         const allSquares = document.querySelectorAll('.square')
         allSquares.forEach(square => square.firstChild?.setAttribute('draggable', false))
     }
-    const king = Array.from(document.querySelectorAll('#king'))
-    console.log(kings)
+    
     if (!kings.some(king => king.firstChild.classList.contains('black'))) {
         infoDisplay.innerHTML = "White wins!"
         const allSquares = document.querySelectorAll('.square')
